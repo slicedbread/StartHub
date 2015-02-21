@@ -1,0 +1,37 @@
+
+extends base
+
+block vars
+  - var title = 'Create Account'
+
+block body
+  .container(ng-controller="AppCtrl")
+    h1 Account List
+    table.table
+      thead
+        tr
+          th Id
+          th Password
+          th &#160;
+          th &#160;
+      tbody
+        tr
+          td
+            input.form-control(type="text", ng-model="account.id")
+          td
+            input.form-control(type="text", ng-model="account.password")
+          td
+            button.fbtn.btn-primary(ng-click="addAccount()") Add Account
+          td
+            button.btn.btn-info(ng-click="update()") Update
+            button.btn.btn-info(ng-click="deselect()") Clear
+        tr(ng-repeat="account in accountList")
+          td {{account.id}}
+          td {{account.password}}
+          td
+            button.btn.btn-danger(ng-click="remove \
+            (account._id)") Remove
+          td
+            button.btn.btn-warning(ng-click="edit (account._id)") Edit
+  script(src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js")
+  script(src="controllers/controller.js")
