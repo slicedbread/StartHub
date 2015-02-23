@@ -1,8 +1,8 @@
 {
-	"name": "starthub",
+	"name": "starterapp",
 	"description": "Full-Stack JavaScript with MongoDB, Express, AngularJS, and Node.js",
 	"version": "0.0.1",
-	"author": "Starthub",
+	"author": "StartHub",
 	"engines": {
 		"node": "0.10.x",
 		"npm": "1.4.x"

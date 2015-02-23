@@ -3,7 +3,7 @@
 module.exports = {
 	db: 'mongodb://meanuser:meanpass@ds047591.mongolab.com:47591/starthub',
 	app: {
-		title: 'Starthub - Development Environment'
+		title: 'starterApp - Development Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

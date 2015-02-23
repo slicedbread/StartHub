@@ -11,26 +11,39 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
                 icon: 'glyphicon-user',
                 color:'btn-success',
                 total: '20,408',
-                description: 'TOTAL USERS'
+                description: 'TOTAL CUSTOMERS'
             },
             {
-                icon: 'glyphicon-folder-open',
+                icon: 'glyphicon-calendar',
                 color: 'btn-primary',
                 total: '8,382',
-                description: 'TOTAL PROJECTS'
+                description: 'UPCOMING EVENTS'
             },
             {
                 icon: 'glyphicon-edit',
                 color: 'btn-success',
                 total: '527',
-                description: 'NEW USERS IN 24H'
+                description: 'NEW CUSTOMERS IN 24H'
             },
             {
                 icon: 'glyphicon-record',
                 color: 'btn-info',
                 total: '85,000',
                 description: 'EMAILS SENT'
+            },
+            {
+                icon: 'glyphicon-eye-open',
+                color: 'btn-warning',
+                total: '268',
+                description: 'FOLLOW UPS REQUIRED'
+            },
+            {
+                icon: 'glyphicon-flag',
+                color:'btn-danger',
+                total: '348',
+                description:'REFERRALS TO MODERATE'
             }
         ];
-	}
+
+    }
 ]);
