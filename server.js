@@ -1,36 +1,60 @@
-'use strict';
-/**
- * Module dependencies.
- */
-var init = require('./config/init')(),
-	config = require('./config/config'),
-	mongoose = require('mongoose'),
-	chalk = require('chalk');
+var express = require('express');
+var app = express();
 
-/**
- * Main application entry file.
- * Please note that the order of loading is important.
- */
+var mongojs = require('mongojs');
+var db = mongojs('accountList', ['accountList']);
+var bodyParser = require('body-parser');
 
-// Bootstrap db connection
-var db = mongoose.connect(config.db, function(err) {
-	if (err) {
-		console.error(chalk.red('Could not connect to MongoDB!'));
-		console.log(chalk.red(err));
-	}
+
+app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.json());
+
+
+app.get('/accountList', function (req, res){
+	console.log("I received a GET request")
+
+
+	db.accountList.find(function (err, docs){
+		console.log(docs);
+		res.json(docs);
+	});
+
 });
 
-// Init the express application
-var app = require('./config/express')(db);
+app.post('/accountList', function (req, res) {
+	console.log(req.body);
+	db.accountList.insert(req.body, function(err, doc) {
+		res.json(doc);
+	})
+});
 
-// Bootstrap passport config
-require('./config/passport')();
+app.delete('/accountList/:id', function (req, res) {
+	var id = req.params.id;
+	console.log(id);
+	db.accountList.remove({_id: mongojs.ObjectId(id)}, function (err, doc) {
+		res.json(doc);
+	})
+});
 
-// Start the app by listening on <port>
-app.listen(config.port);
+app.get('/accountList/:id', function (req, res) {
+	var id = req.params.id;
+	console.log(id);
+	db.accountList.findOne({_id: mongojs.ObjectId(id)}, function (err, doc) {
+		res.json(doc);
+	});
+});
 
-// Expose app
-exports = module.exports = app;
+app.put('/accountList/:id', function (req, res) {
+	var id = req.params.id;
+	console.log(req.body.id);
+	db.accountList.findAndModify({query: {_id: mongojs.ObjectId(id)},
+		update: {$set: {id: req.body.id, password: req.body.password}},
+		new: true}, function (err, doc) {
+			res.json(doc);
+		});
 
-// Logging initialization
-console.log('MEAN.JS application started on port ' + config.port);
+	
+});
+
+app.listen(3000);
+console.log("Server running on port 3000");
